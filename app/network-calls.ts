@@ -13,7 +13,8 @@ export async function POST(apiUrl: any, payload: any) {
 		headers: myHeaders,
 		body: JSON.stringify(payload),
 		cache: "no-store",
-		maxBodyLength: Infinity
+		maxBodyLength: Infinity,
+		timeout: 30000
 	};
 
 	try {

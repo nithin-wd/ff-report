@@ -104,27 +104,27 @@ const Main = () => {
 							<div className="flex">
 								<div>{exe?.fullName}</div>
 							</div>
-							<div className="flex">
+							<div className="flex items-center gap-x-[5px]">
 								<div>Assigned</div>
 								<div>
 									{JSON.stringify(
 										leads?.filter(
 											(lead: any) => (lead?.assignTo === exe?._id && lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === expoAttendedID)?.value) === true
-										)?.length
+										)?.length || 0
 									)}
 								</div>
 							</div>
-							<div className="flex">
+							<div className="flex items-center gap-x-[5px]">
 								<div>Completed</div>
 								<div>
 									{JSON.stringify(
 										leads?.filter(
 											(lead: any) => lead?.assignTo === exe?._id && lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === sessionCompletedID)?.value === true
-										)?.length
+										)?.length || 0
 									)}
 								</div>
 							</div>
-							<div className="flex">
+							<div className="flex items-center gap-x-[5px]">
 								<div>Queue</div>
 								<div>
 									{JSON.stringify(
@@ -133,7 +133,7 @@ const Main = () => {
 												lead?.assignTo === exe?._id &&
 												lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === expoAttendedID)?.value === true &&
 												lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === sessionCompletedID)?.value !== true
-										)?.length
+										)?.length || 0
 									)}
 								</div>
 							</div>
