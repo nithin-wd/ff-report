@@ -14,7 +14,7 @@ export async function POST(apiUrl: any, payload: any) {
 		body: JSON.stringify(payload),
 		cache: "no-store",
 		maxBodyLength: Infinity,
-		timeout: 30000
+		timeout: Infinity
 	};
 
 	try {
