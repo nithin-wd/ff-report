@@ -2,6 +2,7 @@
 const { version } = require("./package.json");
 
 const nextConfig = {
+	distDir: "build",
 	publicRuntimeConfig: {
 		version
 	},
