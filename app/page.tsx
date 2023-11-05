@@ -71,7 +71,7 @@ const Main = () => {
 	return (
 		<main className="fixed top-0 bottom-0 left-0 right-0 overflow-y-auto p-[40px]">
 			<div className="flex justify-between mb-[30px]">
-				<div>Dashboard</div>
+				<div className="text-[22px]">Dashboard</div>
 				<div className="flex">
 					<div>{updatedAt}</div>
 					<div>{isFetching ? "(Fetching)" : ""}</div>

@@ -12,7 +12,8 @@ export async function POST(apiUrl: any, payload: any) {
 		method: "POST",
 		headers: myHeaders,
 		body: JSON.stringify(payload),
-		cache: "no-store"
+		cache: "no-store",
+		maxBodyLength: Infinity
 	};
 
 	try {
