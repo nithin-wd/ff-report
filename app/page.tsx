@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { getAllLeads, getAllUsers } from "./network-calls";
+import { getAllLeads, getAllUsers, getLeadList } from "./network-calls";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
@@ -14,7 +14,7 @@ const Main = () => {
 		refetch
 	} = useQuery({
 		queryKey: ["lead-list"],
-		queryFn: () => getAllLeads(),
+		queryFn: () => getLeadList(),
 
 		staleTime: 1000 * 60, // 1min
 		retry: false,
@@ -43,17 +43,18 @@ const Main = () => {
 
 	const totalCount: any = useMemo(() => leads?.length || 0, [leads]);
 	const kitCollected: any = useMemo(() => {
-		const kit = leads?.filter((lead: any) => lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === kitCollectedID));
+		console.log({ leads });
+		const kit = leads?.filter((lead: any) => lead?.customDataTypes?.find((cDt: any) => cDt?.cdt?._id === kitCollectedID));
 		console.log({ kit });
 		return kit?.length || 0;
 	}, [leads]);
 	const expoAttended: any = useMemo(() => {
-		const expo = leads?.filter((lead: any) => lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === expoAttendedID));
+		const expo = leads?.filter((lead: any) => lead?.customDataTypes?.find((cDt: any) => cDt?.cdt?._id === expoAttendedID));
 		console.log({ expo });
 		return expo?.length || 0;
 	}, [leads]);
 	const seminarAttended: any = useMemo(() => {
-		const seminar = leads?.filter((lead: any) => lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === seminarAttendedID));
+		const seminar = leads?.filter((lead: any) => lead?.customDataTypes?.find((cDt: any) => cDt?.cdt?._id === seminarAttendedID));
 		console.log({ seminar });
 		return seminar?.length || 0;
 	}, [leads]);
@@ -109,8 +110,9 @@ const Main = () => {
 								<div>
 									{JSON.stringify(
 										leads?.filter(
-											(lead: any) => (lead?.assignTo === exe?._id && lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === expoAttendedID)?.value) === true
-										)?.length || 0
+											(lead: any) =>
+												(lead?.assignTo === exe?._id && lead?.customDataTypes?.find((cDt: any) => cDt?.cdt?._id === expoAttendedID)?.value) === true
+										)?.length
 									)}
 								</div>
 							</div>
@@ -119,8 +121,9 @@ const Main = () => {
 								<div>
 									{JSON.stringify(
 										leads?.filter(
-											(lead: any) => lead?.assignTo === exe?._id && lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === sessionCompletedID)?.value === true
-										)?.length || 0
+											(lead: any) =>
+												lead?.assignTo === exe?._id && lead?.customDataTypes?.find((cDt: any) => cDt?.cdt?._id === sessionCompletedID)?.value === true
+										)?.length
 									)}
 								</div>
 							</div>
@@ -131,9 +134,9 @@ const Main = () => {
 										leads?.filter(
 											(lead: any) =>
 												lead?.assignTo === exe?._id &&
-												lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === expoAttendedID)?.value === true &&
-												lead?.customDataTypes?.find((cDt: any) => cDt?.cdtId === sessionCompletedID)?.value !== true
-										)?.length || 0
+												lead?.customDataTypes?.find((cDt: any) => cDt?.cdt?._id === expoAttendedID)?.value === true &&
+												lead?.customDataTypes?.find((cDt: any) => cDt?.cdt?._id === sessionCompletedID)?.value !== true
+										)?.length
 									)}
 								</div>
 							</div>
